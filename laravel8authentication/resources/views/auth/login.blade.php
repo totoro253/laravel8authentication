@@ -20,6 +20,13 @@
                             <input type="password" name="password" id="password" class="form-control rounded-0" placeholder="Password">
                             <div class="invalid-feedback"></div>
                         </div>
+                        <div class="mb-3">
+                            <a class="text-decoration-none" href="">Forgot password?</a>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="Login" class="btn btn-dark rounded-0"
+                            id="login_btn">
+                        </div>
                     </form>
                 </div>
             </div>
