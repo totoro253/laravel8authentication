@@ -19,3 +19,4 @@ Route::get('/forgot',[UserController::class,'forgot']);
 Route::get('/reset',[UserController::class,'reset']);
 
 Route::post('/register',[UserController::class, 'saveUser'])->name('auth.register');
+Route::post('/login',[UserController::class, 'loginUser'])->name('auth.login');

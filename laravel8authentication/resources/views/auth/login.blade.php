@@ -40,5 +40,19 @@
 @endsection
 
 @section('script')
-
+<script>
+    $("#login_form").submit(function(e){
+        e.preventDefault()
+        $("#login_btn").val('Please wait...');
+        $.ajax({
+            url: '{{ route('auth.login')}}',
+            method: 'post',
+            data: $(this).serialize(),
+            dataType:  'json',
+            success:  function(res){
+                console.log(res);
+            }
+        })
+    })
+</script>
 @endsection  
