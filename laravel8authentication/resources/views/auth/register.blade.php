@@ -10,6 +10,7 @@
                     <h2 class="fw-bold text-secondary">Register</h2>
                 </div>
                 <div class="card-body p-5">
+                    <div id="show_success_alert"></div>
                     <form actions="#" method="POST" id="register_form">
                         @csrf  
                         <div class="mb-3">
@@ -22,10 +23,6 @@
                         </div>
                         <div class="mb-3">
                             <input type="password" name="password" id="password" class="form-control rounded-0" placeholder="Password">
-                            <div class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" name="password" id="password" class="form-control rounded-0" placeholder="Confirm password">
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
@@ -48,5 +45,28 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(function(){
+        $("#register_form").submit(function(e){
+            e.preventDefault();
+            $("#register_btn").text('Please wait...');
+            $.ajax({
+                url:  '{{route('auth.register')}}',
+                method: 'post',
+                data: $(this).serialize(),
+                // datatype:  'json',
+                success: function(res){
+                    showError('name',res.messages.name);
+                    showError('email',res.messages.email);
+                    showError('password',res.messages.password);
+                }else if(res.status == 200 ){
+                    $("#show_success_alert").html(showMessage('success', res.message));
+                    $("#register_form")[0].reset();
+                    removeValidationClasses("#register_form");
+                    $("#register_btn").val('register');
+                }
+            })
+        });
+    });
+</script>
 @endsection  
